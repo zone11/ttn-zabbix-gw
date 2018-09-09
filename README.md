@@ -1,5 +1,5 @@
 # ttn-zabbix-gw
-A external script for ZABBIX to monitor your TTN Gateway metrics.
+A external script for ZABBIX to monitor your TTN Gateway metrics.  
 This includes: Times since seen, packets up, packets, down
 
 Requirements:
@@ -12,5 +12,5 @@ Installation:
 - Add your gateway with the gateway-id (check you TTN console) als "Host Name" - Set the "Visible Name" to whatever you like
 - Asign the "TTN Gateway" Template previously imported
 
-The script is now triggered every 30 seconds and grabs data from the TTN NOC.
+The script is now triggered every 30 seconds and grabs data from the TTN NOC.  
 There are also 3 triggers predefined to inform about gateways beeing offline.
