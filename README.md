@@ -9,8 +9,8 @@ Requirements:
 
 Installation:
 - Import the ZABBIX template
-- Add your gateway with the gateway-id (check you TTN console) als "Host Name" - Set the "Visible Name" to whatever you like
-- Asign the "TTN Gateway" Template previously imported
+- Add your gateway with the gateway-id (check you TTN console) as "Host Name" - Set the "Visible Name" to whatever you like
+- Assign the "TTN Gateway" Template previously imported
 
 The script is now triggered every 30 seconds and grabs data from the TTN NOC.  
-There are also 3 triggers predefined to inform about gateways beeing offline.
+There are also 3 triggers predefined to inform about gateways being offline.
