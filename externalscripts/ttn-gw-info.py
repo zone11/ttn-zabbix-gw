@@ -22,7 +22,7 @@ lastcontact = int(dataset["time"])
 if "uplink" in dataset:
     data_up = dataset["uplink"]
 else:
-    data_up= 0
+    data_up = 0
 
 if "downlink" in dataset:
     data_down = dataset["downlink"]
