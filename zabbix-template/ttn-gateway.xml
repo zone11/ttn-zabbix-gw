@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
-    <version>3.4</version>
-    <date>2018-09-09T13:49:50Z</date>
+    <version>4.0</version>
+    <date>2018-10-13T07:22:14Z</date>
     <groups>
         <group>
             <name>Templates</name>
@@ -54,6 +54,24 @@
                     <logtimefmt/>
                     <preprocessing/>
                     <jmx_endpoint/>
+                    <timeout>3s</timeout>
+                    <url/>
+                    <query_fields/>
+                    <posts/>
+                    <status_codes>200</status_codes>
+                    <follow_redirects>1</follow_redirects>
+                    <post_type>0</post_type>
+                    <http_proxy/>
+                    <headers/>
+                    <retrieve_mode>0</retrieve_mode>
+                    <request_method>1</request_method>
+                    <output_format>0</output_format>
+                    <allow_traps>0</allow_traps>
+                    <ssl_cert_file/>
+                    <ssl_key_file/>
+                    <ssl_key_password/>
+                    <verify_peer>0</verify_peer>
+                    <verify_host>0</verify_host>
                     <master_item/>
                 </item>
                 <item>
@@ -91,6 +109,24 @@
                     <logtimefmt/>
                     <preprocessing/>
                     <jmx_endpoint/>
+                    <timeout>3s</timeout>
+                    <url/>
+                    <query_fields/>
+                    <posts/>
+                    <status_codes>200</status_codes>
+                    <follow_redirects>1</follow_redirects>
+                    <post_type>0</post_type>
+                    <http_proxy/>
+                    <headers/>
+                    <retrieve_mode>0</retrieve_mode>
+                    <request_method>1</request_method>
+                    <output_format>0</output_format>
+                    <allow_traps>0</allow_traps>
+                    <ssl_cert_file/>
+                    <ssl_key_file/>
+                    <ssl_key_password/>
+                    <verify_peer>0</verify_peer>
+                    <verify_host>0</verify_host>
                     <master_item/>
                 </item>
                 <item>
@@ -128,6 +164,24 @@
                     <logtimefmt/>
                     <preprocessing/>
                     <jmx_endpoint/>
+                    <timeout>3s</timeout>
+                    <url/>
+                    <query_fields/>
+                    <posts/>
+                    <status_codes>200</status_codes>
+                    <follow_redirects>1</follow_redirects>
+                    <post_type>0</post_type>
+                    <http_proxy/>
+                    <headers/>
+                    <retrieve_mode>0</retrieve_mode>
+                    <request_method>1</request_method>
+                    <output_format>0</output_format>
+                    <allow_traps>0</allow_traps>
+                    <ssl_cert_file/>
+                    <ssl_key_file/>
+                    <ssl_key_password/>
+                    <verify_peer>0</verify_peer>
+                    <verify_host>0</verify_host>
                     <master_item/>
                 </item>
             </items>
@@ -140,10 +194,42 @@
     </templates>
     <triggers>
         <trigger>
+            <expression>{TTN Gateway:ttn-gw-info.py[{HOSTNAME}].last()}&gt;3600 and {TTN Gateway:ttn-gw-info.py[{HOSTNAME}].last()}&lt;=86400</expression>
+            <recovery_mode>0</recovery_mode>
+            <recovery_expression/>
+            <name>Offline &gt; 1h</name>
+            <correlation_mode>0</correlation_mode>
+            <correlation_tag/>
+            <url/>
+            <status>0</status>
+            <priority>3</priority>
+            <description/>
+            <type>0</type>
+            <manual_close>0</manual_close>
+            <dependencies/>
+            <tags/>
+        </trigger>
+        <trigger>
+            <expression>{TTN Gateway:ttn-gw-info.py[{HOSTNAME}].last()}&gt;300 and {TTN Gateway:ttn-gw-info.py[{HOSTNAME}].last()}&lt;=1800</expression>
+            <recovery_mode>0</recovery_mode>
+            <recovery_expression/>
+            <name>Offline &gt; 5 minutes</name>
+            <correlation_mode>0</correlation_mode>
+            <correlation_tag/>
+            <url/>
+            <status>0</status>
+            <priority>1</priority>
+            <description/>
+            <type>0</type>
+            <manual_close>0</manual_close>
+            <dependencies/>
+            <tags/>
+        </trigger>
+        <trigger>
             <expression>{TTN Gateway:ttn-gw-info.py[{HOSTNAME}].last()}&gt;86400</expression>
             <recovery_mode>0</recovery_mode>
             <recovery_expression/>
-            <name>Offline &gt; day!</name>
+            <name>Offline &gt; 24h</name>
             <correlation_mode>0</correlation_mode>
             <correlation_tag/>
             <url/>
@@ -156,10 +242,10 @@
             <tags/>
         </trigger>
         <trigger>
-            <expression>{TTN Gateway:ttn-gw-info.py[{HOSTNAME}].last()}&gt;360 and {TTN Gateway:ttn-gw-info.py[{HOSTNAME}].last()}&lt;=86400</expression>
+            <expression>{TTN Gateway:ttn-gw-info.py[{HOSTNAME}].last()}&gt;1800 and {TTN Gateway:ttn-gw-info.py[{HOSTNAME}].last()}&lt;=3600</expression>
             <recovery_mode>0</recovery_mode>
             <recovery_expression/>
-            <name>Offline &gt; hour</name>
+            <name>Offline &gt; 30min</name>
             <correlation_mode>0</correlation_mode>
             <correlation_tag/>
             <url/>
@@ -171,21 +257,71 @@
             <dependencies/>
             <tags/>
         </trigger>
-        <trigger>
-            <expression>{TTN Gateway:ttn-gw-info.py[{HOSTNAME}].last()}&gt;60 and {TTN Gateway:ttn-gw-info.py[{HOSTNAME}].last()}&lt;=360</expression>
-            <recovery_mode>0</recovery_mode>
-            <recovery_expression/>
-            <name>Offline &gt; minute</name>
-            <correlation_mode>0</correlation_mode>
-            <correlation_tag/>
-            <url/>
-            <status>0</status>
-            <priority>1</priority>
-            <description/>
-            <type>0</type>
-            <manual_close>0</manual_close>
-            <dependencies/>
-            <tags/>
-        </trigger>
     </triggers>
+    <graphs>
+        <graph>
+            <name>Packets Down</name>
+            <width>900</width>
+            <height>200</height>
+            <yaxismin>0.0000</yaxismin>
+            <yaxismax>100.0000</yaxismax>
+            <show_work_period>1</show_work_period>
+            <show_triggers>1</show_triggers>
+            <type>0</type>
+            <show_legend>1</show_legend>
+            <show_3d>0</show_3d>
+            <percent_left>0.0000</percent_left>
+            <percent_right>0.0000</percent_right>
+            <ymin_type_1>0</ymin_type_1>
+            <ymax_type_1>0</ymax_type_1>
+            <ymin_item_1>0</ymin_item_1>
+            <ymax_item_1>0</ymax_item_1>
+            <graph_items>
+                <graph_item>
+                    <sortorder>0</sortorder>
+                    <drawtype>1</drawtype>
+                    <color>F63100</color>
+                    <yaxisside>0</yaxisside>
+                    <calc_fnc>2</calc_fnc>
+                    <type>0</type>
+                    <item>
+                        <host>TTN Gateway</host>
+                        <key>ttn-gw-info.py[{HOSTNAME}, up]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <name>Packets Up</name>
+            <width>900</width>
+            <height>200</height>
+            <yaxismin>0.0000</yaxismin>
+            <yaxismax>100.0000</yaxismax>
+            <show_work_period>1</show_work_period>
+            <show_triggers>1</show_triggers>
+            <type>0</type>
+            <show_legend>1</show_legend>
+            <show_3d>0</show_3d>
+            <percent_left>0.0000</percent_left>
+            <percent_right>0.0000</percent_right>
+            <ymin_type_1>0</ymin_type_1>
+            <ymax_type_1>0</ymax_type_1>
+            <ymin_item_1>0</ymin_item_1>
+            <ymax_item_1>0</ymax_item_1>
+            <graph_items>
+                <graph_item>
+                    <sortorder>0</sortorder>
+                    <drawtype>1</drawtype>
+                    <color>1A7C11</color>
+                    <yaxisside>0</yaxisside>
+                    <calc_fnc>2</calc_fnc>
+                    <type>0</type>
+                    <item>
+                        <host>TTN Gateway</host>
+                        <key>ttn-gw-info.py[{HOSTNAME}, down]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+    </graphs>
 </zabbix_export>
