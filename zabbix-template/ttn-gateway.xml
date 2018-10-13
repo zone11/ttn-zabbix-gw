@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>4.0</version>
-    <date>2018-10-13T07:22:14Z</date>
+    <date>2018-10-13T07:25:42Z</date>
     <groups>
         <group>
             <name>Templates</name>
@@ -213,7 +213,7 @@
             <expression>{TTN Gateway:ttn-gw-info.py[{HOSTNAME}].last()}&gt;300 and {TTN Gateway:ttn-gw-info.py[{HOSTNAME}].last()}&lt;=1800</expression>
             <recovery_mode>0</recovery_mode>
             <recovery_expression/>
-            <name>Offline &gt; 5 minutes</name>
+            <name>Offline &gt; 5min</name>
             <correlation_mode>0</correlation_mode>
             <correlation_tag/>
             <url/>
