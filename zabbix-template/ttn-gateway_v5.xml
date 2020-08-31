@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>5.0</version>
+    <date>2020-08-31T15:02:15Z</date>
+    <groups>
+        <group>
+            <name>Templates</name>
+        </group>
+    </groups>
+    <templates>
+        <template>
+            <template>TTN Gateway</template>
+            <name>TTN Gateway</name>
+            <groups>
+                <group>
+                    <name>Templates</name>
+                </group>
+            </groups>
+            <items>
+                <item>
+                    <name>Delta Up</name>
+                    <type>CALCULATED</type>
+                    <key>delta.up</key>
+                    <delay>30s</delay>
+                    <status>DISABLED</status>
+                    <params>&quot;ttn-gw-info.py[{HOSTNAME}, up]&quot; - last(&quot;ttn-gw-info.py[{HOSTNAME}, up]&quot;)</params>
+                </item>
+                <item>
+                    <name>Status Offline &gt; 5min</name>
+                    <type>CALCULATED</type>
+                    <key>statusOffline5min</key>
+                    <delay>30s</delay>
+                    <history>1d</history>
+                    <trends>1d</trends>
+                    <params>last(ttn-gw-info.py[{HOSTNAME}]) &gt; 300</params>
+                </item>
+                <item>
+                    <name>Status Offline &gt; 30min</name>
+                    <type>CALCULATED</type>
+                    <key>statusOffline30min</key>
+                    <delay>30s</delay>
+                    <history>1d</history>
+                    <trends>1d</trends>
+                    <params>last(ttn-gw-info.py[{HOSTNAME}]) &gt; 1800</params>
+                </item>
+                <item>
+                    <name>Packets Down</name>
+                    <type>EXTERNAL</type>
+                    <key>ttn-gw-info.py[{HOSTNAME}, down]</key>
+                    <delay>30s</delay>
+                    <request_method>POST</request_method>
+                </item>
+                <item>
+                    <name>Packets Up</name>
+                    <type>EXTERNAL</type>
+                    <key>ttn-gw-info.py[{HOSTNAME}, up]</key>
+                    <delay>30s</delay>
+                    <request_method>POST</request_method>
+                </item>
+                <item>
+                    <name>Last Seen</name>
+                    <type>EXTERNAL</type>
+                    <key>ttn-gw-info.py[{HOSTNAME}]</key>
+                    <delay>30s</delay>
+                    <units>s</units>
+                    <request_method>POST</request_method>
+                    <triggers>
+                        <trigger>
+                            <expression>{last()}&gt;3600 and {last()}&lt;=86400</expression>
+                            <name>Offline &gt; 1h</name>
+                            <priority>AVERAGE</priority>
+                        </trigger>
+                        <trigger>
+                            <expression>{last()}&gt;300 and {last()}&lt;=1800</expression>
+                            <name>Offline &gt; 5min</name>
+                            <priority>INFO</priority>
+                        </trigger>
+                        <trigger>
+                            <expression>{last()}&gt;86400</expression>
+                            <name>Offline &gt; 24h</name>
+                            <priority>HIGH</priority>
+                        </trigger>
+                        <trigger>
+                            <expression>{last()}&gt;1800 and {last()}&lt;=3600</expression>
+                            <name>Offline &gt; 30min</name>
+                            <priority>WARNING</priority>
+                        </trigger>
+                    </triggers>
+                </item>
+            </items>
+        </template>
+    </templates>
+    <graphs>
+        <graph>
+            <name>Packets Down</name>
+            <graph_items>
+                <graph_item>
+                    <drawtype>FILLED_REGION</drawtype>
+                    <color>F63100</color>
+                    <item>
+                        <host>TTN Gateway</host>
+                        <key>ttn-gw-info.py[{HOSTNAME}, up]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <name>Packets Up</name>
+            <graph_items>
+                <graph_item>
+                    <drawtype>FILLED_REGION</drawtype>
+                    <color>1A7C11</color>
+                    <item>
+                        <host>TTN Gateway</host>
+                        <key>ttn-gw-info.py[{HOSTNAME}, down]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+    </graphs>
+</zabbix_export>
